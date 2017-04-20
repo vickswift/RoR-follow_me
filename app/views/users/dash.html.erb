@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div class="row">
+    <h1> Welcome <%= @user.name %> </h1>
+    <h4><a href="/logout">Logout </a></h4>
+  </div>
+
+  <div class='row'>
+
+    <div class='col-md-6'>
+      <div class="panel panel-default">
+        <div class="panel-heading">People You Follow</div>
+        <div class="panel-body">
+
+          <% @friends.each do |friend| %>
+
+            <p><b>Name:</b> <%= friend.name %> </p>
+            <p><b>Email:</b> <%= friend.email %> </p>
+
+            <a href="/unfollow/<%= @user.id %>/<%= friend.id %>" class='btn btn-default'> Unfollow</a>
+              <hr>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+    <div class='col-md-6'>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">People To Follow</div>
+        <div class="panel-body">
+
+          <% @other_people.each do |person| %>
+            <% if !@friends.include?(person) %>
+              <p><b>Name:</b> <%= person.name %> </p>
+              <p><b>Email:</b> <%= person.email %> </p>
+
+              <a href="/follow/<%= @user.id %>/<%= person.id %>" class='btn btn-default'> Follow</a>
+              <hr>
+            <% end %>
+          <% end %>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
